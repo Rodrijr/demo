@@ -18,10 +18,8 @@ public class AuthService {
     }
 
     public String login(String email, String password) {
-        // Buscar el usuario por username
         User user = userRepository.findByEmail(email) ;
         logger.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Este es un mensaje de información" + user.getEmail());
-        // Verificar si el usuario existe y si la contraseña es correcta
         if (user != null && user.getPassword().equals(password)) {
             return jwtUtil.generateToken(email); // Generar el JWT
         }

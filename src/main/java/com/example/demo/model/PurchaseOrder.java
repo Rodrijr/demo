@@ -1,27 +1,38 @@
 package com.example.demo.model;
 
-import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 @Entity
-@Table(name = "purchase_order") // Cambiamos el nombre de la tabla
+@Table(name = "purchase_order")
 public class PurchaseOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Long userId; // Identificador del usuario
     private String customerName;
-
     private String deliveryAddress;
-
     private Double totalAmount;
+    private String status;
 
     @OneToMany(mappedBy = "purchaseOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference 
     private List<OrderItem> items = new ArrayList<>();
 
     // Constructor vacío
-    public PurchaseOrder() {}
+    public PurchaseOrder() {
+    }
 
     // Getters y setters
     public Long getId() {
@@ -30,6 +41,14 @@ public class PurchaseOrder {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getCustomerName() {
@@ -72,5 +91,13 @@ public class PurchaseOrder {
     public void removeItem(OrderItem item) {
         items.remove(item);
         item.setPurchaseOrder(null);
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
