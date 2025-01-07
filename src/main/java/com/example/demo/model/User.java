@@ -27,20 +27,20 @@ public class User {
     @Column(nullable = false)
     private String password;
     
-    @Column(nullable = false)
     private String username;
 
 
     public User() {
     }
     
-    public User(String name, String email, String lastname, String address, LocalDate birthDate, String password) {
+    public User(String name, String email, String lastname, String address, LocalDate birthDate, String password, String username) {
         this.name = name;
         this.email = email;
         this.lastname = lastname;
         this.address = address;
         this.birthDate = birthDate;
-        this.password = password;
+        this.password = password; 
+        this.username = username;
     }
 
     public Long getId() {
@@ -57,6 +57,14 @@ public class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {

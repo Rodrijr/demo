@@ -13,6 +13,7 @@ public class Product {
     private String name;
     private String description;
     private String quantity;
+    private String image;
     private Double price;
 
     public Product() {
@@ -39,6 +40,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getDescription() {
